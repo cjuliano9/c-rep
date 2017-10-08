@@ -17,7 +17,7 @@ class Neuron {
 	double h; 
 	double R; //resistance R=tau/c
 	int nb_spikes;
-	vector<double> tab_spikes;	//pour stocker le temps des spikes
+	vector<double> tab_spikes;	
 	
 	
 	
@@ -35,8 +35,6 @@ class Neuron {
 	double getPot() const;
 	int getSpikes() const;
 	vector<double> getTime() const;
-	double getH() const;
-	double getV() const;
 	
 	//SETTER//
 	
