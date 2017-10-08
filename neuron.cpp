@@ -1,5 +1,4 @@
 #include "neuron.h"
-#include <random>
 
 
 void Neuron::update(int input_current){										
