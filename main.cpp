@@ -1,25 +1,35 @@
 #include <iostream>
+#include "neuron.cpp"
 using namespace std;
 
 int main(){
 	
 	Neuron n1;
-	double simtime(0);
-	double t_stop; //initialiser
-	const double Vpot=-55;
+	double simtime;
+	double t_start(0.0);
+	double t_stop; 
+	double h(0.1);
+	double I;
+	double V_thr(20.0);
+	
+	cout<<"Enter an external current:"<<endl;
+	cin>>I;
+	cout<<"And a simulation time:"<<endl;
+	cin>>t_stop;
+	
+	simtime=t_start;
 	
 	while (simtime<t_stop){
-		/*input_current=I(t)*/
-		if (){
-			V=0;
-		}	else if (double getV()>Vpot){
-			n1.update(1);
+		if (){			//if (neuron is refractory??)
+		n1.setV(0.0);
+		}	
+		else if (n1.getV()>V_thr){
+			n1.count_spikes(simtime);	
 		}
-		simtime+=n1.getH();
-	}
-							//if neuron is refractory->V=0 else if(v>v(threshold)) store spike time 
-						V=c1*V+c2*I;					//equation V=V(t+h)
-	
+		n1.update(I);
+		simtime+=h;
+		}
+								
 	
 	return 0;
 }
