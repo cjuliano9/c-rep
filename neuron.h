@@ -8,23 +8,28 @@ using namespace std;
 
 class Neuron {
 	
-	private: //C=250?
+	
+	private: 
 	
 	double V;		//membrane potential
-	double V_reset;
-	double tau; //ms
-	double ref_t;
-	double h; 
-	double R; //resistance R=tau/c
+	const double V_reset;
+	const double V_thr;
+	const double tau; //ms
+	const double ref_t;
+	const double h;  //initialize in the constructor or in the main*/
+	const double R; //resistance R=tau/c
+	
 	int nb_spikes;
 	vector<double> tab_spikes;	
+	
+	double refractory_count; 
 	
 	
 	
 	public:
 	//CONSTRUCTEUR/DESTRUCTEUR//
 	
-	Neuron(): V_reset(0.0), tau(20.0), ref_t(2.0), R(1.0), nb_spikes(0)
+	Neuron(): V_reset(0.0),V_thr(20.0), tau(20.0), ref_t(2.0), h(0.1), R(20.0), nb_spikes(0) ,refractory_count(ref_t/h)
 	{}
 		
 	~Neuron(){
@@ -35,6 +40,7 @@ class Neuron {
 	double getPot() const;
 	int getSpikes() const;
 	vector<double> getTime() const;
+	double getH() const;
 	
 	//SETTER//
 	
@@ -42,7 +48,7 @@ class Neuron {
 	
 	//METHODE UPDATE//
 	
-	void update(int input_current);
+	bool update(int time, int input_current);
 	
 	//VARIABLES PUBLICS??
 	

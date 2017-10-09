@@ -4,41 +4,41 @@
 using namespace std;
 
 int main(){
-	
+
 	Neuron n1;
 	double simtime;
 	double t_start(0.0);
-	double t_stop; 
-	double h(0.1);
-	double I;
-	double V_thr(20.0);
+	double t_stop(8000.0);
+	double i_start(1000);
+	double i_stop(4000);
+	double I_ext(1.01);
 	ofstream file;
-	
-	cout<<"Enter an external current:"<<endl;
-	cin>>I;
-	cout<<"And a simulation time:"<<endl;
-	cin>>t_stop;
-	
 	simtime=t_start;
 	
+	bool isRefractory;
+
 	file.open("potential.txt");
-	
-	while (simtime<t_stop){
 		
-		if (...){			//if (neuron is refractory?-> bool?)
-		n1.setV(0.0);		//Vreset / tau_ref
-		}
+		double I;
+
+		while (simtime<t_stop){
 			
-		else if (n1.getPot()>V_thr){
-			n1.count_spikes(simtime);	//Then set neuron to refractory
+			if (simtime<i_start or simtime>i_stop){
+			I=0.0;
+			}
+			
+			else{
+			I=I_ext;	
+			}
+			
+			n1.update(simtime, I);
+			file<<n1.getPot()<<endl;						
+			simtime+=n1.getH();
+			
 		}
 		
-		n1.update(I);
-		file<<n1.getPot();	// register from getter??
-		simtime+=h;
-	}
-		
+
 	file.close();
-								
+
 	return 0;
 }

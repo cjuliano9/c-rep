@@ -1,9 +1,25 @@
 #include "neuron.h"
 
 
-void Neuron::update(int input_current){										
+bool Neuron::update(int time,int input_current){	
+	
+			
+	if (V>V_thr){
+		count_spikes(time);	
+		}
+	
+	if (refractory_count>0.0){			
+		V=V_reset;
+		refractory_count--;		
+		return true;
+		}	
+		
+	else{									
 	V=c1*V+c2*input_current;
+	return false;
 	}
+	
+}
 
 void Neuron::count_spikes(double t){
 	nb_spikes+=1;
@@ -21,6 +37,10 @@ int Neuron::getSpikes() const{
 vector<double> Neuron::getTime() const{
 	return tab_spikes;
 }
+
+ double Neuron::getH() const{
+	 return h;
+ }
 
 void Neuron::setV(double v){
 	V=v;
