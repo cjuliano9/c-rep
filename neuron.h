@@ -16,7 +16,7 @@ class Neuron {
 	const double V_thr;
 	const double tau; //ms
 	const double ref_t;
-	const double h;  //initialize in the constructor or in the main*/
+	const double h;
 	const double R; //resistance R=tau/c
 
 	int nb_spikes;
@@ -29,8 +29,8 @@ class Neuron {
 	public:
 	//CONSTRUCTEUR/DESTRUCTEUR//
 
-	Neuron(): V_reset(0.0),V_thr(20.0), tau(20.0), ref_t(2.0), h(0.1), R(20.0), nb_spikes(0) /*,refractory_count(ref_t/h)
-	*/{}
+	Neuron(): V_reset(0.0),V_thr(20.0), tau(20.0), ref_t(2.0), h(0.1), R(20.0), nb_spikes(0) ,refractory_count(ref_t/h)//Initialiser a 0???
+	{}
 
 	~Neuron(){
 	}

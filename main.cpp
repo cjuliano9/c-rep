@@ -9,9 +9,9 @@ int main(){
 	double simtime;
 	double t_start(0.0);
 	double t_stop(1000.0);
-	double i_start(100);
+	double i_start(100);		//which values
 	double i_stop(400);
-	double I_ext(1.01);
+	double I_ext(2.0);
 	ofstream file;
 	simtime=t_start;
 
@@ -21,7 +21,6 @@ int main(){
 	file.open("potential.txt");
 
 		double I;
-
 		while (simtime<t_stop){
 
 			if (simtime<i_start or simtime>i_stop){
@@ -30,16 +29,17 @@ int main(){
 
 			else{
 			I=I_ext;
-			}
+		}
 
-			n1.update(simtime, I);
+			n1.update(simtime, I_ext);
 			file<<n1.getPot()<<endl;
+			cout<<n1.getPot()<<endl;
 			simtime+=n1.getH();
 
 		}
 
-
-	file.close();
+		cout<<"number of spikes: "<<n1.getSpikes()<<endl;
+		file.close();
 
 	return 0;
 }

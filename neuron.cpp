@@ -6,23 +6,19 @@ bool Neuron::update(int time,int input_current){
 	if (refractory_count>0.0){
 		V=V_reset;
 		refractory_count--;
-		cout<<V<<endl;
 		return true;
-	} else
-	{
-		if (V>V_thr){
-			count_spikes(time);
-			V=V_reset;
-			refractory_count=(ref_t/h);
-			cout<<V<<endl;
-			return true;
+	} else{
+				if (V>V_thr){
+				count_spikes(time);
+				V=V_reset;
+				refractory_count=(ref_t/h);
+				return true;
+				}
+					else{
+						V=c1*V+c2*input_current;
+						return false;
+						}
 			}
-			else {
-				V=c1*V+c2*input_current;
-				cout<<V<<endl;
-				return false;
-			}
-		}
 }
 void Neuron::count_spikes(double t){
 	nb_spikes+=1;
