@@ -14,10 +14,10 @@ int main(){
 	const double i_start(100);		//which values
 	const double i_stop(400);
 	const double I_ext(2.0);
-	const double D(1.5); //delay
+
 	ofstream file;
 	simtime=t_start;
-
+	double I;
 	bool spike; //=n1.update()
 
 	file.open("potential.txt");
@@ -26,7 +26,6 @@ int main(){
 		cerr<<"Error when opening the file"<<endl;
 	}	else{
 
-		double I;
 		while (simtime<t_stop){
 
 			if (simtime<i_start or simtime>i_stop){
@@ -41,12 +40,12 @@ int main(){
 			file<<n1.getPot()<<endl;
 			cout<<"neuron 1: "<<n1.getPot()<<endl;
 
-		if(spike==true){										//If n1 spikes, update of n2 at simtime+D
-			//n2.update(simtime+D,I_ext); // update before the if???
-			n2.setV(n2.getPot()+n1.getJ()); //n2 responds at t=tpre+D V+=J
-			n2.update(simtime+D,I_ext);
-			cout<<"neuron 2: "<<n2.getPot()<<endl;
+			if(spike==true){										//If n1 spikes at t=simtime, update of n2 at t+D
+			n2.setDelay();
 			}
+			n2.update(simtime,I_ext);
+
+			cout<<"neuron 2: "<<n2.getPot()<<endl;
 			simtime+=n1.getH();
 		}
 

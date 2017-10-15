@@ -19,20 +19,21 @@ class Neuron {
 	const double h;
 	const double R; //resistance R=tau/c
 
+	const double D;
 	const double J; //amplitude
-
 	int nb_spikes;
 	vector<double> tab_spikes;
 
 	double refractory_count;
 	double delay_count;
-
+	bool delay;
 
 
 	public:
 	//CONSTRUCTEUR/DESTRUCTEUR//
 
-	Neuron(): V_reset(0.0),V_thr(20.0), tau(20.0), ref_t(2.0), h(0.1), R(20.0), J(1.5), nb_spikes(0) ,refractory_count(ref_t/h)//Initialiser a 0???
+	Neuron(): V_reset(0.0),V_thr(20.0), tau(20.0), ref_t(2.0), h(0.1), R(20.0), D(1.5), J(0.1), nb_spikes(0) ,refractory_count(ref_t/h)//Initialiser a 0???
+	,delay_count(D/h), delay(false)
 	{}
 
 	~Neuron(){
@@ -44,15 +45,16 @@ class Neuron {
 	int getSpikes() const;
 	vector<double> getTime() const;
 	double getH() const;
-	double getJ() const;
+	//double getJ() const;
 
 	//SETTER//
 
 	void setV(double v);
+	void setDelay();
 
 	//METHODE UPDATE//
 
-	bool update(int time, int input_current);
+	bool update(int time, double input_current);
 
 	//VARIABLES PUBLICS??
 
@@ -62,7 +64,6 @@ class Neuron {
 	//AUTRES METHODES
 
 	void count_spikes(double t);
-
 
 };
 
