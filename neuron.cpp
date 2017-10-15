@@ -13,17 +13,6 @@ bool Neuron::update(int time,double input_current){
 
 		 V=c1*V+c2*input_current;
 
-		 if (delay==true){
-
-		 	if (delay_count>0.0){
-	 	 	delay_count--;
-	 	 	}
-
-			else{
-			V+=J;
-			}
-		}
-
 		 	if (V>V_thr){
 			count_spikes(time);
 			V=V_reset;
@@ -35,8 +24,27 @@ bool Neuron::update(int time,double input_current){
 				return false;
 			}
 		}
+
+		neuron_clock++;
 }
 
+void Neuron::connexion(double time, double I_ext, bool spiking){
+
+		 if (spiking==true){
+		 	if (delay_count>0.0){
+	 	 	delay_count--;
+			this->update(time,I_ext);
+	 	 	}
+			else{		//delay count = 0 -> signal has reached n2
+			V=c1*V+J;
+			postsynaptic=true;
+			setDelay();
+			}
+		}
+			else{
+				this->update(time,I_ext);
+			}
+	}
 
 void Neuron::count_spikes(double t){
 	nb_spikes+=1;
@@ -70,5 +78,4 @@ void Neuron::setV(double v){
 
 void Neuron::setDelay(){
 	delay_count=(D/h);
-	delay=true;
 }

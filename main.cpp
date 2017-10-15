@@ -37,19 +37,23 @@ int main(){
 			}
 
 			spike=n1.update(simtime, I_ext);
+
+			if (n2.postsynaptic==true){
+				n2.update(simtime,0.0);
+			}
+
 			file<<n1.getPot()<<endl;
 			cout<<"neuron 1: "<<n1.getPot()<<endl;
 
-			if(spike==true){										//If n1 spikes at t=simtime, update of n2 at t+D
-			n2.setDelay();
-			}
-			n2.update(simtime,I_ext);
+			/*if(spike==true){}*/								//If n1 spikes at t=simtime, update of n2 at t+D
+			n2.connexion(simtime,I_ext,spike);
 
 			cout<<"neuron 2: "<<n2.getPot()<<endl;
 			simtime+=n1.getH();
 		}
 
 		cout<<"number of spikes: "<<n1.getSpikes()<<endl;
+		cout<<"spikes n2: "<<n2.getSpikes()<<endl;
 	}
 		file.close();
 
