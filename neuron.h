@@ -53,19 +53,18 @@ class Neuron {
 	//SETTER//
 
 	void setV(double v);
-	void setDelay(); 						// define the delay steps
+	bool setDelay(); 						// define the delay steps
 
 	//METHODE UPDATE//
 
 	bool update(int time, double input_current);
-
+	bool update_post(double time,bool isDelay);
 	//VARIABLES PUBLICS??
 
 	bool postsynaptic;
 
 	//AUTRES METHODES
 
-	void connexion(double time, double I_ext, bool spiking);
 	void count_spikes(double t);
 };
 

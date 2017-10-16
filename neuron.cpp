@@ -6,7 +6,7 @@ bool Neuron::update(int time,double input_current){
 	if (refractory_count>0.0){
 		V=V_reset;
 		refractory_count--;
-		return true;
+		return false;
 	}
 
 	 else{
@@ -28,25 +28,24 @@ bool Neuron::update(int time,double input_current){
 		n_clock++;
 }
 
-void Neuron::connexion(double time, double I_ext, bool spiking){
+bool Neuron::update_post(double time,bool isDelay){ //courant attribut?
 
-		 if (spiking==true){
-		 	if (delay_count>0.0){
-	 	 	delay_count--;
-			V=V_reset;
-			//update(time,I_ext);
+	if (isDelay==true){
+			if (delay_count>0.0){
+			update(time,0.0);
+			delay_count--;
+			return true;
 	 	 	}
 			else{		//delay count = 0 -> signal has reached n2
 			update(time,0.0);
 			V+=J;
-			postsynaptic=true;
-			setDelay();
+			return false;
 			}
 		}
-
-			else{
-				update(time,I_ext);
-			}
+		else{
+			update(time,0.0);
+			return false;
+		}
 	}
 
 void Neuron::count_spikes(double t){
@@ -75,6 +74,7 @@ void Neuron::setV(double v){
 }
 
 
-void Neuron::setDelay(){
+bool Neuron::setDelay(){
 	delay_count=(D/h);
+	return true;
 }
