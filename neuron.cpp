@@ -25,7 +25,7 @@ bool Neuron::update(int time,double input_current){
 			}
 		}
 
-		neuron_clock++;
+		n_clock++;
 }
 
 void Neuron::connexion(double time, double I_ext, bool spiking){
@@ -33,16 +33,19 @@ void Neuron::connexion(double time, double I_ext, bool spiking){
 		 if (spiking==true){
 		 	if (delay_count>0.0){
 	 	 	delay_count--;
-			this->update(time,I_ext);
+			V=V_reset;
+			//update(time,I_ext);
 	 	 	}
 			else{		//delay count = 0 -> signal has reached n2
-			V=c1*V+J;
+			update(time,0.0);
+			V+=J;
 			postsynaptic=true;
 			setDelay();
 			}
 		}
+
 			else{
-				this->update(time,I_ext);
+				update(time,I_ext);
 			}
 	}
 
@@ -50,10 +53,6 @@ void Neuron::count_spikes(double t){
 	nb_spikes+=1;
 	tab_spikes.push_back(t);
 }
-
-/*double Neuron::getJ() const{
-	return J;
-}*/
 
 double Neuron::getPot() const{
 	return V;
