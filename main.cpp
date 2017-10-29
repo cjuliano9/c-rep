@@ -1,30 +1,82 @@
 #include <iostream>
 #include <fstream>
+#include <random>
 #include "neuron.cpp"
 using namespace std;
 
+
 int main(){
 
-	Neuron n1;
-	Neuron n2;
+	double J_excitatory(0.1);
+	double J_inhibitory(0.5);
 
-	double simtime;
+	int nb_excitatory(10000);
+	int nb_inhibitory(2500);
+	int nb_neurons(nb_excitatory+nb_inhibitory);
+
+	int excitatory_connexion(1000);
+	int inhibitory_connexion(250);
+
+	vector<Neuron> tab_neurons(nb_neurons);
+	vector<vector<bool> > connexion (nb_neurons*nb_neurons) ;
+
+
+	for (int i(0);i<nb_neurons; ++i){
+		if (i<nb_excitatory) {
+		tab_neurons[i].setJ(J_excitatory);
+		}
+		else {
+		tab_neurons[i].setJ(J_inhibitory);
+		//excitatory=false;
+		}
+	}
+
+	random_device device;
+	mt19937 gen(device());
+	bernoulli_distribution d(0.5);
+
+for (size_t i(0);i<tab_neurons.size();++i){
+	int compt(0);
+while (compt<excitatory_connexion){
+for (int j(0);j<nb_excitatory;++j){
+			if (i==j){
+				connexion[i][j]=false;
+			}
+			else{
+			bool outcome = d(gen);
+			connexion[i][j]=outcome;
+			}
+			if (connexion[i][j]==true){
+				tab_neurons[i].setIndex(j);
+				compt++;
+			}
+		}
+	}
+	compt=0;
+	while (compt<inhibitory_connexion){
+		for(size_t k(0); nb_excitatory<k<tab_neurons.size();++k){
+			if (i==k){
+				connexion[i][k]=false;
+			}
+			else{
+			bool outcome = d(gen);
+			connexion[i][k]=outcome;
+			}
+			if (connexion[i][k]==true){
+				tab_neurons[i].setIndex(k);
+			}
+		}
+	}
+}
+
+	int simtime(0);
+
 	const double t_start(0.0);
 	const double t_stop(20.0);
-	const double i_start(10);		//which values
-	const double i_stop(40);
-	const double I_ext(2.0); //external current
-
 	ofstream file;
-	simtime=t_start;
-	bool spike1; //=n1.update()
-	bool D;
-	double I;
+	bool spike; //=n.update()
 
-
-	/*void setCurrent(double I){
-			I_ext=I;
-	}*/
+	 int time_steps((t_stop-t_start)/0.1);
 
 	file.open("potential.txt");
 
@@ -32,38 +84,26 @@ int main(){
 		cerr<<"Error when opening the file"<<endl;
 	}	else{
 
-		while (simtime<t_stop){
+		while (simtime<time_steps){				//changed from time stop to time step
 
-			if (simtime<i_start or simtime>i_stop){
-			I=0.0;
+			for (size_t i(0);i<tab_neurons.size();++i){ 
+			spike=tab_neurons[i].update(simtime,0.0);			//regarde si spike ou pas (booléen renvoyé par update)
+			file<<"Neuron "<<i<<" :"<<tab_neurons[i].getPot()<<endl;
+
+			cout<<"Neuron "<<i<<" :"<<tab_neurons[i].getPot()<<endl;
+
+				if (spike==true){
+					for (size_t j(0); j<tab_neurons[i].getSize(); ++j){
+						int t(tab_neurons[i].getIndex(j));
+								tab_neurons[t].receive(simtime+tab_neurons[t].getD());		//send the signal to the target neuron and register J in buffer
+				}
 			}
-
-			else{
-			I=I_ext;
-			}
-
-			//for (int i(0);i<tab_neuron.size();++i){ spike=tab_neuron[i].update(simtime,I_ext)}
-			spike1=n1.update(simtime, I_ext);
-			//spike2=n2.update(simtime,I_ext);
-			//pour tout n target
-
-			file<<n1.getPot()<<endl;
-			cout<<"neuron 1: "<<n1.getPot()<<endl;
-
-			if (spike1==true){					//If n1 spikes at t=simtime, update of n2 at t+D
-				D=n2.setDelay();
-			}
-
-			D=n2.update_post(simtime,D);		//when delay count=0, V+=J
-
-			cout<<"neuron 2: "<<n2.getPot()<<endl;
-			simtime+=n1.getH();					//increase global clock
 		}
-
-		cout<<"number of spikes: "<<n1.getSpikes()<<endl;
-		cout<<"spikes n2: "<<n2.getSpikes()<<endl;
+			simtime++;					//increase global clock
+		}
 	}
-		file.close();
+
+	file.close();
 
 	return 0;
 }

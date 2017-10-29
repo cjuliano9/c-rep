@@ -17,29 +17,30 @@ class Neuron {
 	const double tau; //ms
 	const double ref_t;
 	const double h;
-	const double I_ext;
 	const double R; //resistance R=tau/c
 	const double c1;
 	const	double c2;
 	const double D;
-	const double J; //amplitude
+	double J; //amplitude
 
 	int nb_spikes;
 	vector<double> tab_spikes;
 
 	double refractory_count;
-	double delay_count;
+	int delay_count;
 
-	vector<int> buffer;
-	double n_clock;
+	vector<double> buffer;
+	int n_clock;
+
+	vector<int> connexion_index;
 
 	public:
+
+	bool excitatory;
+
 	//CONSTRUCTEUR/DESTRUCTEUR//
 
-	Neuron(): V_reset(0.0),V_thr(20.0), tau(20.0), ref_t(2.0), h(0.1), I_ext(2.0), R(20.0), c1(exp(-h/tau)), c2(R*(1-c1)), D(1.5), J(0.1), nb_spikes(0) ,refractory_count(ref_t/h)//Initialiser a 0???
-	,delay_count(D/h), buffer(delay_count+1), postsynaptic(false)
-	{}
-
+	Neuron();
 	~Neuron(){
 	}
 
@@ -49,23 +50,26 @@ class Neuron {
 	int getSpikes() const;
 	vector<double> getTime() const;
 	double getH() const;
+	double getD() const;
+	int getIndex(int i) const;
+	size_t getSize() const;
 
 	//SETTER//
 
 	void setV(double v);
-	bool setDelay(); 						// define the delay steps
-
+	void setJ(double j);
+	void setIndex(int j);
 	//METHODE UPDATE//
 
 	bool update(int time, double input_current);
-	bool update_post(double time,bool isDelay);
-	//VARIABLES PUBLICS??
 
-	bool postsynaptic;
 
 	//AUTRES METHODES
 
 	void count_spikes(double t);
+	void receive(int time);
+
+	//SURCHARGES D'OPERATEURS
 };
 
 #endif
