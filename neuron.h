@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <random>
 
 using namespace std;
 
@@ -22,12 +23,17 @@ class Neuron {
 	const	double c2;
 	const double D;
 	double J; //amplitude
+	const double J_ext;
+	double synaptic_current;
 
 	int nb_spikes;
 	vector<double> tab_spikes;
 
 	double refractory_count;
 	int delay_count;
+
+	const double nu_ext;
+	const double nu_eta;
 
 	vector<double> buffer;
 	int n_clock;
@@ -36,7 +42,7 @@ class Neuron {
 
 	public:
 
-	bool excitatory;
+	//bool excitatory;
 
 	//CONSTRUCTEUR/DESTRUCTEUR//
 
