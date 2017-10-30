@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <random>
-#include "neuron.cpp"
+#include <cassert>
+#include "neuron.h"
 using namespace std;
 
 
@@ -37,24 +38,24 @@ int main(){
 
 	for (size_t t=0; t<tab_neurons.size();++t){
 
-	for (int i(0);i<excitatory_connexion;++i){
+	for (unsigned int i(0);i<excitatory_connexion;++i){
 		auto target= d1(gen);
-		if (target==t){
+		/*if (target==t){
 			i--;
 		}
-		else{
+		else{*/
 		tab_neurons[t].setIndex(target);
-		}
+		//}
 	}
 
-	for (int i(0);i<inhibitory_connexion;++i){
+	for (unsigned int i(0);i<inhibitory_connexion;++i){
 			auto target= d2(gen);
-			if (target==t){
+			/*if (target==t){
 				i--;
 			}
-			else{
+			else{*/
 			tab_neurons[t].setIndex(target);
-			}
+			//}
 		}
 
 	}
@@ -67,7 +68,7 @@ int main(){
 	ofstream file;
 	bool spike; //=n.update()
 
-	 int time_steps((t_stop-t_start)/0.1); //faire une fonction simulation
+	int time_steps((t_stop-t_start)/0.1);
 
 	file.open("spike.jdf");
 
@@ -76,20 +77,17 @@ int main(){
 	}	else{
 
 		while (simtime<time_steps){				//changed from time stop to time step
-
 			for (size_t i(0);i<tab_neurons.size();++i){
 			spike=tab_neurons[i].update(simtime,0.0);			//regarde si spike ou pas (booléen renvoyé par update)
-
-			//file<<"Neuron "<<i<<" :"<<tab_neurons[i].getPot()<<endl;
-
+			
 				if (spike==true){
 				file<<"Time of spike: "<<simtime<<'\t'<<" Neuron: "<<i<<'\n';
 					for (size_t j(0); j<tab_neurons[i].getSize(); ++j){ //getsize renvoie la taille du tableau de target
-						int t(tab_neurons[i].getIndex(j));
-						tab_neurons[t].receive(simtime);		//send the signal to the target neuron and register J in buffer
+					auto t=tab_neurons[i].getIndex(j);
+					tab_neurons[t].receive(simtime);		//send the signal to the target neuron and register J in buffer
+					}
 				}
 			}
-		}
 			simtime++;					//increase global clock
 		}
 	}

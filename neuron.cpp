@@ -79,7 +79,8 @@ void Neuron::setIndex(int j){
 }
 
 void Neuron::receive(int time){
-	size_t t(time+delay_count%(delay_count+1));
+	size_t t((time+delay_count)%buffer.size());
+	assert(t<buffer.size());
 	buffer[t]+=J;
 	/*for(size_t i(0);i<buffer.size();++i){
 		cerr<<"in buffer:"<<buffer[i]<<endl;
