@@ -30,7 +30,7 @@ class Neuron {
 	int nb_spikes;
 	vector<double> tab_spikes;
 
-	double refractory_count;
+	int refractory_count;
 	int delay_count;
 
 	const double nu_ext;
@@ -55,12 +55,12 @@ class Neuron {
 
 	double getPot() const;
 	int getSpikes() const;
-	vector<double> getTime() const;
+	//vector<double> getTime() const;
 	double getH() const;
 	double getD() const;
 	int getIndex(int i) const;
 	size_t getSize() const;
-
+	double getJ() const;
 	//SETTER//
 
 	void setV(double v);
@@ -74,7 +74,7 @@ class Neuron {
 	//AUTRES METHODES
 
 	void count_spikes(double t);
-	void receive(int time);
+	void receive(int time, double J_);
 
 	//SURCHARGES D'OPERATEURS
 };

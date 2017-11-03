@@ -9,7 +9,7 @@ using namespace std;
 int main(){
 
 	double J_excitatory(0.1);
-	double J_inhibitory(0.5);
+	double J_inhibitory(-0.5);
 
 	int nb_excitatory(10000);
 	int nb_inhibitory(2500);
@@ -57,20 +57,21 @@ int main(){
 			tab_neurons[t].setIndex(target);
 			//}
 		}
-
 	}
 
 
 	int simtime(0);
+	int spikes;
 
 	const double t_start(0.0);
-	const double t_stop(10.0);
+	const double t_stop(100.0);
 	ofstream file;
 	bool spike; //=n.update()
+	
+	double time_steps((t_stop-t_start)/0.1);
+	static_cast <int> (time_steps);
 
-	int time_steps((t_stop-t_start)/0.1);
-
-	file.open("spike.jdf");
+	file.open("spikes.txt");
 
 	if(file.fail()){
 		cerr<<"Error when opening the file"<<endl;
@@ -81,16 +82,18 @@ int main(){
 			spike=tab_neurons[i].update(simtime,0.0);			//regarde si spike ou pas (booléen renvoyé par update)
 			
 				if (spike==true){
-				file<<"Time of spike: "<<simtime<<'\t'<<" Neuron: "<<i<<'\n';
+					spikes ++;
+				file<</*"Time of spike: "<<*/simtime<<'\t'<</*" Neuron: "<<*/i<<'\n';
 					for (size_t j(0); j<tab_neurons[i].getSize(); ++j){ //getsize renvoie la taille du tableau de target
 					auto t=tab_neurons[i].getIndex(j);
-					tab_neurons[t].receive(simtime);		//send the signal to the target neuron and register J in buffer
+					tab_neurons[t].receive(simtime,tab_neurons[i].getJ());		//send the signal to the target neuron and register J in buffer
 					}
 				}
 			}
 			simtime++;					//increase global clock
 		}
 	}
+	cerr<<"spike: "<<spikes<<endl;
 
 	file.close();
 

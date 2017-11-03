@@ -2,20 +2,21 @@
 
 
 bool Neuron::update(int time,double input_current){
-	if (refractory_count>0.0){
+	
+	if (refractory_count>0){
 		V=V_reset;
 		refractory_count--;
 		return false;
 	}
 	 else{
-
+			
 		 static random_device rd;
 		 static mt19937 gen(rd());
 		 static poisson_distribution<> d(nu_ext);
-
-		 synaptic_current=buffer[time%(delay_count+1)]+J_ext*d(gen);
+		 
+		 synaptic_current=buffer[time%buffer.size()]+J_ext*d(gen);
 		 V=c1*V+c2*input_current+synaptic_current;
-		 buffer[time%(delay_count+1)]=0.0; //remet le buffer a zero
+		 buffer[(time%(delay_count+1))] = 0.0; //remet le buffer a zero
 
 		 	if (V>V_thr){
 			count_spikes(time);
@@ -46,9 +47,9 @@ int Neuron::getSpikes() const{
 	return nb_spikes;
 }
 
-vector<double> Neuron::getTime() const{
+/*vector<double> Neuron::getTime() const{
 	return tab_spikes;
-}
+}*/
 
  double Neuron::getH() const{
 	 return h;
@@ -65,6 +66,9 @@ void Neuron::setJ(double j){
 	J=j;
 }
 
+double Neuron::getJ() const{
+	return J;
+}
 
 int Neuron::getIndex(int i) const{
 	return connexion_index[i];
@@ -78,13 +82,10 @@ void Neuron::setIndex(int j){
 	connexion_index.push_back(j);
 }
 
-void Neuron::receive(int time){
+void Neuron::receive(int time, double J_){
 	size_t t((time+delay_count)%buffer.size());
 	assert(t<buffer.size());
-	buffer[t]+=J;
-	/*for(size_t i(0);i<buffer.size();++i){
-		cerr<<"in buffer:"<<buffer[i]<<endl;
-	}*/
+	buffer[t]+=J_;
 }
 
 Neuron::Neuron() : V_reset(0.0),V_thr(20.0), tau(20.0), ref_t(2.0), h(0.1), R(20.0), c1(exp(-h/tau)), c2(R*(1-c1)), D(1.5),J_ext(0.1), nb_spikes(0) ,refractory_count(0)
