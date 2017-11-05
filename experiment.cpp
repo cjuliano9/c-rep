@@ -37,7 +37,7 @@ void Experiment::setNetwork(){
 
 	for ( int i(0);i<excitatory_connexion;++i){
 		auto target= d1(gen);
-		tab_neurons[target].setIndex(t);
+		tab_neurons[target].setIndex(t);        //makes neuron t receiving connection
 	}
 
 	for (int i(0);i<inhibitory_connexion;++i){
@@ -50,15 +50,15 @@ void Experiment::setNetwork(){
 * @return void;
 */
 void Experiment::simulation(){
-	
 
-  cout<<"Enter the ratio of nu_ext/nu_threshold: "<<endl;
+
+  cout<<"Enter the ratio of nu_ext/nu_threshold : "<<endl;
   cin>>eta;
-  cout<<"Enter the value of g:"<<endl;
+  cout<<"Enter the value of g (relative weights) : "<<endl;
   cin>>g;
   J_inhibitory=-g*0.1;
   setNetwork();
-  
+
   file.open("spikes.txt");
 
   if(file.fail()){
@@ -81,15 +81,15 @@ void Experiment::updateNetwork(){
 assert(tab_neurons.size() != 0);
 
 for (size_t i(0);i<tab_neurons.size();++i){
-	
-spike=tab_neurons[i].update(simtime,0.0);			
 
-  if (spike==true){
+	spike=tab_neurons[i].update(simtime,0.0);
+
+	if (spike==true){
     file<<simtime<<'\t'<<i<<'\n';
-    for (size_t j(0); j<tab_neurons[i].getSize(); ++j){ 
-    auto t=tab_neurons[i].getIndex(j);
-    tab_neurons[t].receive(simtime,tab_neurons[i].getJ());	
-    }
+		for (size_t j(0); j<tab_neurons[i].getConnectSize(); ++j){
+		auto t=tab_neurons[i].getIndex(j); //getIndex gives the index of neuron at the position j in tab of connection
+		tab_neurons[t].receive(simtime,tab_neurons[i].getJ()); // The neuron at position given by getIndex receives the spike
+		}
   }
 }
 

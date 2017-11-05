@@ -10,8 +10,8 @@ using namespace std;
 class Experiment{
 
 private:
-  int eta; //!< to stock the eta value given by user
-  int g; //!< ratio of J_inhibitory/J_ext
+  double eta; //!< to stock the eta value given by user
+  double g; //!< ratio of J_inhibitory/J_ext
   int simtime; //!< time of the simulation
   const double h; //!< each time step
   double t_start;  //!< starting time
@@ -38,7 +38,6 @@ public:
   void updateNetwork(); //!< updates each neuron of the network
   void setTime(const double t_init,const double t_fin); //!< set the time of the simulation in time steps
   void simulation(); //!< calls update network at each time step
-
 
 };
 

@@ -24,7 +24,7 @@ bool Neuron::update(int time,double input_current){
 
 		 synaptic_current=buffer[time%(delay_count+1)]+J_ext*d(gen);
 		 V=c1*V+c2*input_current+synaptic_current;
-		 buffer[time%(delay_count+1)]=0.0; 
+		 buffer[time%(delay_count+1)]=0.0;
 
 		 	if (V>V_thres){
 			count_spikes(time);
@@ -39,14 +39,22 @@ bool Neuron::update(int time,double input_current){
 			}
 		}
 }
-
+/**
+* @param int time, double current
+* @return void;
+*/
+void Neuron::receive(int time, double current){
+	size_t t((time+delay_count)%buffer.size());
+	assert(t<buffer.size());
+	buffer[t]+=current;
+}
 /**
 * @param double t
 * @return void
 */
-void Neuron::count_spikes(double t){
+void Neuron::count_spikes(int t){
 	nb_spikes+=1;
-	tab_spikes.push_back(t);
+	tab_spikes.push_back(t*h);
 }
 /**
 * @return double V
@@ -60,17 +68,12 @@ double Neuron::getPot() const{
 int Neuron::getSpikes() const{
 	return nb_spikes;
 }
-
-vector<double> Neuron::getTime() const{
-	return tab_spikes;
-}
 /**
 * @return double h
 */
  double Neuron::getH() const{
 	 return h;
  }
-
  /**
  * @return int delay_count
  */
@@ -83,6 +86,13 @@ vector<double> Neuron::getTime() const{
 */
 void Neuron::setJ(double j){
 	J=j;
+}
+/**
+* @param double j
+* @return void;
+*/
+void Neuron::setJext(double j){
+	J_ext=j;
 }
 /**
 * @return double J;
@@ -104,6 +114,19 @@ size_t Neuron::getConnectSize() const{
 	return connexion_index.size();
 }
 /**
+* @param int i
+* @return double;
+*/
+double Neuron::getBufferValue(int i) const{
+	return buffer[i];
+}
+/**
+* @return int;
+*/
+int Neuron::getRefCount() const{
+	return refractory_count;
+}
+/**
 * @param int j
 * @return void;
 */
@@ -114,16 +137,6 @@ void Neuron::setIndex(int j){
 * @param int eta
 * @return void;
 */
-void Neuron::setEta(int eta){
+void Neuron::setEta(double eta){
 nu_eta=eta;
 }
-/**
-* @param int time, double current
-* @return void;
-*/
-void Neuron::receive(int time, double current){
-	size_t t((time+delay_count)%buffer.size());
-	assert(t<buffer.size());
-	buffer[t]+=current;
-}
-

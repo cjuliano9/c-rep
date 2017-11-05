@@ -24,11 +24,11 @@ class Neuron {
 	const double c2; //!< constant used in potential update
 	const double D; //!< Delay
 	double J; //!< Amplitude of spike
-	const double J_ext; //!< external current from background noise
+	double J_ext; //!< external current from background noise
 	double synaptic_current; //!< background noise + amplitude
 
 	int nb_spikes; //!< counter for number of spikes
-
+	vector<double> tab_spikes;
 	int refractory_count; //!< internal clock to count the refractory period in time steps
 	int delay_count; //!< to count the delay in time steps
 
@@ -54,18 +54,21 @@ class Neuron {
 	int getIndex(int i) const; //!<return the index of the tab of targets
 	size_t getConnectSize() const; //!< return the size of the tab of targets
 	double getJ() const; //!< return the amplitude J
+	double getBufferValue(int i) const; //!< return value at position i (used for unit testing)
+	int getRefCount() const; //!< return refractory_count (used for unit testing)
 
 	//SETTERS//
 
 	void setV(double v); //!< set the potential
 	void setJ(double j); //!< set the amplitude
+	void setJext(double j); //!< set the external current (used for unit testing)
 	void setIndex(int j); //!< set the tab of index
-	void setEta(int eta); //!< set the ratio nu_ext/nu_threshold
-	
+	void setEta(double eta); //!< set the ratio nu_ext/nu_threshold
+
 	//OTHER METHODS//
 
 	bool update(int time, double input_current); //!<update the potential of neuron at each time step and return a boolean if spiking
-	void count_spikes(double t);  //!<count the number of spikes and add the time in a tab of spikes
+	void count_spikes(int t);  //!<count the number of spikes and add the time in a tab of spikes
 	void receive(int time, double current);  //!<put the value of current in the buffer of target neuron
 
 };
