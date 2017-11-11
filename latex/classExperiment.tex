@@ -1,0 +1,100 @@
+\hypertarget{classExperiment}{\section{Experiment Class Reference}
+\label{classExperiment}\index{Experiment@{Experiment}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classExperiment_a303e6a05d99f403ff4793495a2fbff58}{\hyperlink{classExperiment_a303e6a05d99f403ff4793495a2fbff58}{Experiment} ()}\label{classExperiment_a303e6a05d99f403ff4793495a2fbff58}
+
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\hyperlink{classExperiment_a96058d848040e45948bbb60623711da6}{$\sim$\-Experiment} ()
+\item 
+void \hyperlink{classExperiment_a4f384c4aa52147e9c38c01dce850071f}{set\-Network} ()
+\begin{DoxyCompactList}\small\item\em build up the network , connexion between neurons \end{DoxyCompactList}\item 
+void \hyperlink{classExperiment_a41395f7cab731966396573a78ebc2756}{update\-Network} ()
+\begin{DoxyCompactList}\small\item\em updates each neuron of the network \end{DoxyCompactList}\item 
+void \hyperlink{classExperiment_a0bd96c4a240d059958ae700204f5f69d}{set\-Time} (const double t\-\_\-init, const double t\-\_\-fin)
+\begin{DoxyCompactList}\small\item\em set the time of the simulation in time steps \end{DoxyCompactList}\item 
+void \hyperlink{classExperiment_aa41fd11bae28b7b29f974239e293d052}{simulation} ()
+\begin{DoxyCompactList}\small\item\em calls update network at each time step \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classExperiment_a96058d848040e45948bbb60623711da6}{\index{Experiment@{Experiment}!$\sim$\-Experiment@{$\sim$\-Experiment}}
+\index{$\sim$\-Experiment@{$\sim$\-Experiment}!Experiment@{Experiment}}
+\subsubsection[{$\sim$\-Experiment}]{\setlength{\rightskip}{0pt plus 5cm}Experiment\-::$\sim$\-Experiment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classExperiment_a96058d848040e45948bbb60623711da6}
+$<$ destructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{classExperiment_a4f384c4aa52147e9c38c01dce850071f}{\index{Experiment@{Experiment}!set\-Network@{set\-Network}}
+\index{set\-Network@{set\-Network}!Experiment@{Experiment}}
+\subsubsection[{set\-Network}]{\setlength{\rightskip}{0pt plus 5cm}void Experiment\-::set\-Network (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classExperiment_a4f384c4aa52147e9c38c01dce850071f}
+
+
+build up the network , connexion between neurons 
+
+Setter of the Network Set the number of excitatory and inhibitory neurons and assign them the right amplitude J. Set the parameter eta entered by the user for each neuron. Then set the target neurons for each neuron using a uniform distribution. Each neuron 't' will be the target of (nbr inhibitory connections + nbr excitatory connections) random neurons. \begin{DoxyReturn}{Returns}
+void; 
+\end{DoxyReturn}
+\hypertarget{classExperiment_a0bd96c4a240d059958ae700204f5f69d}{\index{Experiment@{Experiment}!set\-Time@{set\-Time}}
+\index{set\-Time@{set\-Time}!Experiment@{Experiment}}
+\subsubsection[{set\-Time}]{\setlength{\rightskip}{0pt plus 5cm}void Experiment\-::set\-Time (
+\begin{DoxyParamCaption}
+\item[{const double}]{t\-\_\-init, }
+\item[{const double}]{t\-\_\-fin}
+\end{DoxyParamCaption}
+)}}\label{classExperiment_a0bd96c4a240d059958ae700204f5f69d}
+
+
+set the time of the simulation in time steps 
+
+Setter for the time of the simulation and conversion to time steps 
+\begin{DoxyParams}{Parameters}
+{\em const} & double t\-\_\-init, const double t\-\_\-fin \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void; 
+\end{DoxyReturn}
+\hypertarget{classExperiment_aa41fd11bae28b7b29f974239e293d052}{\index{Experiment@{Experiment}!simulation@{simulation}}
+\index{simulation@{simulation}!Experiment@{Experiment}}
+\subsubsection[{simulation}]{\setlength{\rightskip}{0pt plus 5cm}void Experiment\-::simulation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classExperiment_aa41fd11bae28b7b29f974239e293d052}
+
+
+calls update network at each time step 
+
+The simulation asks the user to enter the value for the graph wanted. Two parameters are needed, the nu\-\_\-ext/nu\-\_\-threshold ration and the relative weights. The parameters are registered in temporary variables used to set parameters for each neuron. The method also directly set the inhibitory weight with the relative weight entered. Calls \hyperlink{classExperiment_a4f384c4aa52147e9c38c01dce850071f}{set\-Network()} to create neurons and connections. Calls \hyperlink{classExperiment_a41395f7cab731966396573a78ebc2756}{update\-Network()} at each time step. \begin{DoxyReturn}{Returns}
+void; 
+\end{DoxyReturn}
+\hypertarget{classExperiment_a41395f7cab731966396573a78ebc2756}{\index{Experiment@{Experiment}!update\-Network@{update\-Network}}
+\index{update\-Network@{update\-Network}!Experiment@{Experiment}}
+\subsubsection[{update\-Network}]{\setlength{\rightskip}{0pt plus 5cm}void Experiment\-::update\-Network (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classExperiment_a41395f7cab731966396573a78ebc2756}
+
+
+updates each neuron of the network 
+
+For each neuron, calls update and register the returned value in a boolean. If the neuron spikes, register the time of spike and iterates on the tab of connections. Each value in the tab of connections return an index. Calls receive for the neuron given by the index (post-\/synaptic neuron). \begin{DoxyReturn}{Returns}
+void; 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+experiment.\-h\item 
+experiment.\-cpp\end{DoxyCompactItemize}

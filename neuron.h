@@ -47,15 +47,15 @@ class Neuron {
 
 	//GETTERS//
 
-	double getPot() const; //!< return the potential
-	int getSpikes() const; //!< return number of spikes
-	double getH() const; //!< return the constant h, time step
-	int getD() const; //!< return the delay_count
-	int getIndex(int i) const; //!<return the index of the tab of targets
-	size_t getConnectSize() const; //!< return the size of the tab of targets
-	double getJ() const; //!< return the amplitude J
-	double getBufferValue(int i) const; //!< return value at position i (used for unit testing)
-	int getRefCount() const; //!< return refractory_count (used for unit testing)
+	double getPot() const; //!< Getter for the potential
+	int getSpikes() const; //!< Getter for the number of spikes
+	double getH() const; //!< Getter for the constant h, time step
+	int getD() const; //!< Getter for the delay_count
+	int getIndex(int i) const; //!< Getter for the index of the tab of targets
+	size_t getConnectSize() const; //!< Getter for the size of the tab of targets
+	double getJ() const; //!< Getter for the amplitude J
+	double getBufferValue(int i) const; //!< Getter for the value at position i (used for unit testing)
+	int getRefCount() const; //!< Getter for the refractory_count (used for unit testing)
 
 	//SETTERS//
 
@@ -63,12 +63,12 @@ class Neuron {
 	void setJ(double j); //!< set the amplitude
 	void setJext(double j); //!< set the external current (used for unit testing)
 	void setIndex(int j); //!< set the tab of index
-	void setEta(double eta); //!< set the ratio nu_ext/nu_threshold
+	void setEta(double eta); //!< set the ratio nu_ext/nu_threshold, the parameter of the poisson distribution
 
 	//OTHER METHODS//
 
 	bool update(int time, double input_current); //!<update the potential of neuron at each time step and return a boolean if spiking
-	void count_spikes(int t);  //!<count the number of spikes and add the time in a tab of spikes
+	void count_spikes(int t);  //!<count the number of spikes and register time
 	void receive(int time, double current);  //!<put the value of current in the buffer of target neuron
 
 };

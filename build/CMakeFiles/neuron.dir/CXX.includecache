@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/experiment.cpp
+experiment.h
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/experiment.h
+
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/experiment.h
+iostream
+-
+neuron.h
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/neuron.h
+cassert
+-
+fstream
+-
+
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/main.cpp
+iostream
+-
+experiment.h
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/experiment.h
+
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/neuron.cpp
+neuron.h
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/neuron.h
+
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/neuron.h
+iostream
+-
+vector
+-
+cmath
+-
+random
+-
+cassert
+-
+

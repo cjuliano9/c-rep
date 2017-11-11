@@ -4,5 +4,12 @@ project (Neuron)
 
 set(CMAKE_CXX_FLAGS "-O3 -W -Wall -pedantic -std=c++11")
 
-add_executable (neuron neuron.cpp main.cpp experiment.cpp)
+enable_testing()
+add_subdirectory(gtest)
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
+add_executable (neuron neuron.cpp main.cpp experiment.cpp)
+add_executable (unitest neuron.cpp unitest.cpp)
+
+target_link_libraries(unitest gtest gtest_main)
+add_test(unitest unitest)

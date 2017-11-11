@@ -5,15 +5,18 @@ Neuron::Neuron() : V_reset(0.0),V_thres(20.0), tau(20.0), ref_time(2.0), R(20.0)
 {}
 
 /**
+* Verify if neuron is refractory or not.
+* If not: update the membrane potential with the background noise (poisson distribution) and the synaptic current from other neurons.
+* Return true if the neuron is spiking, false if in refractory or inferior to threshold.
 * @param int time, double input_current
 * @return bool spike
-*/
+*/ 
 bool Neuron::update(int time,double input_current){
 
 	if (refractory_count>0.0){
 		V=V_reset;
 		refractory_count--;
-		buffer[time%(delay_count+1)]=0.0;
+		buffer[time%buffer.size()]=0.0;
 		return false;
 	}
 	 else{
@@ -22,9 +25,9 @@ bool Neuron::update(int time,double input_current){
 		 static mt19937 gen(rd());
 		 static poisson_distribution<> d(nu_eta);
 
-		 synaptic_current=buffer[time%(delay_count+1)]+J_ext*d(gen);
+		 synaptic_current=buffer[time%buffer.size()]+J_ext*d(gen);
 		 V=c1*V+c2*input_current+synaptic_current;
-		 buffer[time%(delay_count+1)]=0.0;
+		 buffer[time%buffer.size()]=0.0;
 
 		 	if (V>V_thres){
 			count_spikes(time);
@@ -39,29 +42,36 @@ bool Neuron::update(int time,double input_current){
 			}
 		}
 }
+
 /**
+* The post-synaptic neuron receives amplitude of pre-synaptic when it spikes.
+* set the buffer with the current at the position now+delay
 * @param int time, double current
 * @return void;
-*/
+*/ 
 void Neuron::receive(int time, double current){
 	size_t t((time+delay_count)%buffer.size());
 	assert(t<buffer.size());
 	buffer[t]+=current;
 }
+
 /**
+* Counts the number of spikes and stock the values of time (in ms) in a tab
 * @param double t
 * @return void
-*/
+*/ 
 void Neuron::count_spikes(int t){
 	nb_spikes+=1;
 	tab_spikes.push_back(t*h);
 }
+
 /**
 * @return double V
 */
 double Neuron::getPot() const{
 	return V;
 }
+
 /**
 * @return int nb_spikes
 */
@@ -139,4 +149,12 @@ void Neuron::setIndex(int j){
 */
 void Neuron::setEta(double eta){
 nu_eta=eta;
+}
+
+/**
+ * @param double v
+ * @return void;
+ */
+void Neuron::setV(double v){
+V=v;
 }

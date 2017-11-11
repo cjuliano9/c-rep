@@ -1,0 +1,354 @@
+\hypertarget{classNeuron}{\section{Neuron Class Reference}
+\label{classNeuron}\index{Neuron@{Neuron}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classNeuron_a823487d01615fadb8ac19a2768dd9d96}{\hyperlink{classNeuron_a823487d01615fadb8ac19a2768dd9d96}{Neuron} ()}\label{classNeuron_a823487d01615fadb8ac19a2768dd9d96}
+
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\hyperlink{classNeuron_a94a250ce7e167760e593979b899745b1}{$\sim$\-Neuron} ()
+\item 
+double \hyperlink{classNeuron_ad50bdc13371c54c2cb3ee1da8ec9b4b3}{get\-Pot} () const 
+\begin{DoxyCompactList}\small\item\em Getter for the potential. \end{DoxyCompactList}\item 
+int \hyperlink{classNeuron_ac1edb51fc4fec6c75fc0b136b870e162}{get\-Spikes} () const 
+\begin{DoxyCompactList}\small\item\em Getter for the number of spikes. \end{DoxyCompactList}\item 
+double \hyperlink{classNeuron_a93d421cadcab22e36ea13dd0cc32310b}{get\-H} () const 
+\begin{DoxyCompactList}\small\item\em Getter for the constant h, time step. \end{DoxyCompactList}\item 
+int \hyperlink{classNeuron_a505f58b7ea857b257e6bdf41d6157bcb}{get\-D} () const 
+\begin{DoxyCompactList}\small\item\em Getter for the delay\-\_\-count. \end{DoxyCompactList}\item 
+int \hyperlink{classNeuron_a1d6e0e4830b0088d906befed97c738e0}{get\-Index} (int i) const 
+\begin{DoxyCompactList}\small\item\em Getter for the index of the tab of targets. \end{DoxyCompactList}\item 
+size\-\_\-t \hyperlink{classNeuron_a31d6fd5ff3351bb18e9f0e00115a0a14}{get\-Connect\-Size} () const 
+\begin{DoxyCompactList}\small\item\em Getter for the size of the tab of targets. \end{DoxyCompactList}\item 
+double \hyperlink{classNeuron_a320ab48e220523371b266385c650e31f}{get\-J} () const 
+\begin{DoxyCompactList}\small\item\em Getter for the amplitude J. \end{DoxyCompactList}\item 
+double \hyperlink{classNeuron_ae718bf1d1e5772dcef94301f73418cca}{get\-Buffer\-Value} (int i) const 
+\begin{DoxyCompactList}\small\item\em Getter for the value at position i (used for unit testing) \end{DoxyCompactList}\item 
+int \hyperlink{classNeuron_ac1c1ab9d1b0d0a05814b56e1f3f10ca4}{get\-Ref\-Count} () const 
+\begin{DoxyCompactList}\small\item\em Getter for the refractory\-\_\-count (used for unit testing) \end{DoxyCompactList}\item 
+void \hyperlink{classNeuron_abf35fc96817f39a5bdfe33540d2a137a}{set\-V} (double v)
+\begin{DoxyCompactList}\small\item\em set the potential \end{DoxyCompactList}\item 
+void \hyperlink{classNeuron_a475ad67c35d19e414abff5e973ef93f1}{set\-J} (double j)
+\begin{DoxyCompactList}\small\item\em set the amplitude \end{DoxyCompactList}\item 
+void \hyperlink{classNeuron_a04ceea00a45a58ce3204e431b0f3f894}{set\-Jext} (double j)
+\begin{DoxyCompactList}\small\item\em set the external current (used for unit testing) \end{DoxyCompactList}\item 
+void \hyperlink{classNeuron_aced1625a25c80371b35bb7eb1aaee62c}{set\-Index} (int j)
+\begin{DoxyCompactList}\small\item\em set the tab of index \end{DoxyCompactList}\item 
+void \hyperlink{classNeuron_a14ca97731bce04fa5af8f6919e77e83e}{set\-Eta} (double eta)
+\begin{DoxyCompactList}\small\item\em set the ratio nu\-\_\-ext/nu\-\_\-threshold, the parameter of the poisson distribution \end{DoxyCompactList}\item 
+bool \hyperlink{classNeuron_a0fb85de2b3b3ed0c6c01862e5e170576}{update} (int time, double input\-\_\-current)
+\begin{DoxyCompactList}\small\item\em update the potential of neuron at each time step and return a boolean if spiking \end{DoxyCompactList}\item 
+void \hyperlink{classNeuron_aefea577ee2b365ce4da09c70ad02d657}{count\-\_\-spikes} (int t)
+\begin{DoxyCompactList}\small\item\em count the number of spikes and register time \end{DoxyCompactList}\item 
+void \hyperlink{classNeuron_a3de570cf533d32de50f7d5728e65f171}{receive} (int time, double current)
+\begin{DoxyCompactList}\small\item\em put the value of current in the buffer of target neuron \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classNeuron_a94a250ce7e167760e593979b899745b1}{\index{Neuron@{Neuron}!$\sim$\-Neuron@{$\sim$\-Neuron}}
+\index{$\sim$\-Neuron@{$\sim$\-Neuron}!Neuron@{Neuron}}
+\subsubsection[{$\sim$\-Neuron}]{\setlength{\rightskip}{0pt plus 5cm}Neuron\-::$\sim$\-Neuron (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classNeuron_a94a250ce7e167760e593979b899745b1}
+$<$ destructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{classNeuron_aefea577ee2b365ce4da09c70ad02d657}{\index{Neuron@{Neuron}!count\-\_\-spikes@{count\-\_\-spikes}}
+\index{count\-\_\-spikes@{count\-\_\-spikes}!Neuron@{Neuron}}
+\subsubsection[{count\-\_\-spikes}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\-::count\-\_\-spikes (
+\begin{DoxyParamCaption}
+\item[{int}]{t}
+\end{DoxyParamCaption}
+)}}\label{classNeuron_aefea577ee2b365ce4da09c70ad02d657}
+
+
+count the number of spikes and register time 
+
+Counts the number of spikes and stock the values of time (in ms) in a tab 
+\begin{DoxyParams}{Parameters}
+{\em double} & t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{classNeuron_ae718bf1d1e5772dcef94301f73418cca}{\index{Neuron@{Neuron}!get\-Buffer\-Value@{get\-Buffer\-Value}}
+\index{get\-Buffer\-Value@{get\-Buffer\-Value}!Neuron@{Neuron}}
+\subsubsection[{get\-Buffer\-Value}]{\setlength{\rightskip}{0pt plus 5cm}double Neuron\-::get\-Buffer\-Value (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const}}\label{classNeuron_ae718bf1d1e5772dcef94301f73418cca}
+
+
+Getter for the value at position i (used for unit testing) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & i \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double; 
+\end{DoxyReturn}
+\hypertarget{classNeuron_a31d6fd5ff3351bb18e9f0e00115a0a14}{\index{Neuron@{Neuron}!get\-Connect\-Size@{get\-Connect\-Size}}
+\index{get\-Connect\-Size@{get\-Connect\-Size}!Neuron@{Neuron}}
+\subsubsection[{get\-Connect\-Size}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Neuron\-::get\-Connect\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classNeuron_a31d6fd5ff3351bb18e9f0e00115a0a14}
+
+
+Getter for the size of the tab of targets. 
+
+\begin{DoxyReturn}{Returns}
+size\-\_\-t connexion\-\_\-index.\-size(); 
+\end{DoxyReturn}
+\hypertarget{classNeuron_a505f58b7ea857b257e6bdf41d6157bcb}{\index{Neuron@{Neuron}!get\-D@{get\-D}}
+\index{get\-D@{get\-D}!Neuron@{Neuron}}
+\subsubsection[{get\-D}]{\setlength{\rightskip}{0pt plus 5cm}int Neuron\-::get\-D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classNeuron_a505f58b7ea857b257e6bdf41d6157bcb}
+
+
+Getter for the delay\-\_\-count. 
+
+\begin{DoxyReturn}{Returns}
+int delay\-\_\-count 
+\end{DoxyReturn}
+\hypertarget{classNeuron_a93d421cadcab22e36ea13dd0cc32310b}{\index{Neuron@{Neuron}!get\-H@{get\-H}}
+\index{get\-H@{get\-H}!Neuron@{Neuron}}
+\subsubsection[{get\-H}]{\setlength{\rightskip}{0pt plus 5cm}double Neuron\-::get\-H (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classNeuron_a93d421cadcab22e36ea13dd0cc32310b}
+
+
+Getter for the constant h, time step. 
+
+\begin{DoxyReturn}{Returns}
+double h 
+\end{DoxyReturn}
+\hypertarget{classNeuron_a1d6e0e4830b0088d906befed97c738e0}{\index{Neuron@{Neuron}!get\-Index@{get\-Index}}
+\index{get\-Index@{get\-Index}!Neuron@{Neuron}}
+\subsubsection[{get\-Index}]{\setlength{\rightskip}{0pt plus 5cm}int Neuron\-::get\-Index (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const}}\label{classNeuron_a1d6e0e4830b0088d906befed97c738e0}
+
+
+Getter for the index of the tab of targets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & i \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int connexion\-\_\-index\mbox{[}i\mbox{]}; 
+\end{DoxyReturn}
+\hypertarget{classNeuron_a320ab48e220523371b266385c650e31f}{\index{Neuron@{Neuron}!get\-J@{get\-J}}
+\index{get\-J@{get\-J}!Neuron@{Neuron}}
+\subsubsection[{get\-J}]{\setlength{\rightskip}{0pt plus 5cm}double Neuron\-::get\-J (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classNeuron_a320ab48e220523371b266385c650e31f}
+
+
+Getter for the amplitude J. 
+
+\begin{DoxyReturn}{Returns}
+double J; 
+\end{DoxyReturn}
+\hypertarget{classNeuron_ad50bdc13371c54c2cb3ee1da8ec9b4b3}{\index{Neuron@{Neuron}!get\-Pot@{get\-Pot}}
+\index{get\-Pot@{get\-Pot}!Neuron@{Neuron}}
+\subsubsection[{get\-Pot}]{\setlength{\rightskip}{0pt plus 5cm}double Neuron\-::get\-Pot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classNeuron_ad50bdc13371c54c2cb3ee1da8ec9b4b3}
+
+
+Getter for the potential. 
+
+\begin{DoxyReturn}{Returns}
+double V 
+\end{DoxyReturn}
+\hypertarget{classNeuron_ac1c1ab9d1b0d0a05814b56e1f3f10ca4}{\index{Neuron@{Neuron}!get\-Ref\-Count@{get\-Ref\-Count}}
+\index{get\-Ref\-Count@{get\-Ref\-Count}!Neuron@{Neuron}}
+\subsubsection[{get\-Ref\-Count}]{\setlength{\rightskip}{0pt plus 5cm}int Neuron\-::get\-Ref\-Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classNeuron_ac1c1ab9d1b0d0a05814b56e1f3f10ca4}
+
+
+Getter for the refractory\-\_\-count (used for unit testing) 
+
+\begin{DoxyReturn}{Returns}
+int; 
+\end{DoxyReturn}
+\hypertarget{classNeuron_ac1edb51fc4fec6c75fc0b136b870e162}{\index{Neuron@{Neuron}!get\-Spikes@{get\-Spikes}}
+\index{get\-Spikes@{get\-Spikes}!Neuron@{Neuron}}
+\subsubsection[{get\-Spikes}]{\setlength{\rightskip}{0pt plus 5cm}int Neuron\-::get\-Spikes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classNeuron_ac1edb51fc4fec6c75fc0b136b870e162}
+
+
+Getter for the number of spikes. 
+
+\begin{DoxyReturn}{Returns}
+int nb\-\_\-spikes 
+\end{DoxyReturn}
+\hypertarget{classNeuron_a3de570cf533d32de50f7d5728e65f171}{\index{Neuron@{Neuron}!receive@{receive}}
+\index{receive@{receive}!Neuron@{Neuron}}
+\subsubsection[{receive}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\-::receive (
+\begin{DoxyParamCaption}
+\item[{int}]{time, }
+\item[{double}]{current}
+\end{DoxyParamCaption}
+)}}\label{classNeuron_a3de570cf533d32de50f7d5728e65f171}
+
+
+put the value of current in the buffer of target neuron 
+
+The post-\/synaptic neuron receives amplitude of pre-\/synaptic when it spikes. set the buffer with the current at the position now+delay 
+\begin{DoxyParams}{Parameters}
+{\em int} & time, double current \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void; 
+\end{DoxyReturn}
+\hypertarget{classNeuron_a14ca97731bce04fa5af8f6919e77e83e}{\index{Neuron@{Neuron}!set\-Eta@{set\-Eta}}
+\index{set\-Eta@{set\-Eta}!Neuron@{Neuron}}
+\subsubsection[{set\-Eta}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\-::set\-Eta (
+\begin{DoxyParamCaption}
+\item[{double}]{eta}
+\end{DoxyParamCaption}
+)}}\label{classNeuron_a14ca97731bce04fa5af8f6919e77e83e}
+
+
+set the ratio nu\-\_\-ext/nu\-\_\-threshold, the parameter of the poisson distribution 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & eta \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void; 
+\end{DoxyReturn}
+\hypertarget{classNeuron_aced1625a25c80371b35bb7eb1aaee62c}{\index{Neuron@{Neuron}!set\-Index@{set\-Index}}
+\index{set\-Index@{set\-Index}!Neuron@{Neuron}}
+\subsubsection[{set\-Index}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\-::set\-Index (
+\begin{DoxyParamCaption}
+\item[{int}]{j}
+\end{DoxyParamCaption}
+)}}\label{classNeuron_aced1625a25c80371b35bb7eb1aaee62c}
+
+
+set the tab of index 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & j \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void; 
+\end{DoxyReturn}
+\hypertarget{classNeuron_a475ad67c35d19e414abff5e973ef93f1}{\index{Neuron@{Neuron}!set\-J@{set\-J}}
+\index{set\-J@{set\-J}!Neuron@{Neuron}}
+\subsubsection[{set\-J}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\-::set\-J (
+\begin{DoxyParamCaption}
+\item[{double}]{j}
+\end{DoxyParamCaption}
+)}}\label{classNeuron_a475ad67c35d19e414abff5e973ef93f1}
+
+
+set the amplitude 
+
+
+\begin{DoxyParams}{Parameters}
+{\em double} & j \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void; 
+\end{DoxyReturn}
+\hypertarget{classNeuron_a04ceea00a45a58ce3204e431b0f3f894}{\index{Neuron@{Neuron}!set\-Jext@{set\-Jext}}
+\index{set\-Jext@{set\-Jext}!Neuron@{Neuron}}
+\subsubsection[{set\-Jext}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\-::set\-Jext (
+\begin{DoxyParamCaption}
+\item[{double}]{j}
+\end{DoxyParamCaption}
+)}}\label{classNeuron_a04ceea00a45a58ce3204e431b0f3f894}
+
+
+set the external current (used for unit testing) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em double} & j \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void; 
+\end{DoxyReturn}
+\hypertarget{classNeuron_abf35fc96817f39a5bdfe33540d2a137a}{\index{Neuron@{Neuron}!set\-V@{set\-V}}
+\index{set\-V@{set\-V}!Neuron@{Neuron}}
+\subsubsection[{set\-V}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\-::set\-V (
+\begin{DoxyParamCaption}
+\item[{double}]{v}
+\end{DoxyParamCaption}
+)}}\label{classNeuron_abf35fc96817f39a5bdfe33540d2a137a}
+
+
+set the potential 
+
+
+\begin{DoxyParams}{Parameters}
+{\em double} & v \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void; 
+\end{DoxyReturn}
+\hypertarget{classNeuron_a0fb85de2b3b3ed0c6c01862e5e170576}{\index{Neuron@{Neuron}!update@{update}}
+\index{update@{update}!Neuron@{Neuron}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}bool Neuron\-::update (
+\begin{DoxyParamCaption}
+\item[{int}]{time, }
+\item[{double}]{input\-\_\-current}
+\end{DoxyParamCaption}
+)}}\label{classNeuron_a0fb85de2b3b3ed0c6c01862e5e170576}
+
+
+update the potential of neuron at each time step and return a boolean if spiking 
+
+Verify if neuron is refractory or not. If not\-: update the membrane potential with the background noise (poisson distribution) and the synaptic current from other neurons. Return true if the neuron is spiking, false if in refractory or inferior to threshold. 
+\begin{DoxyParams}{Parameters}
+{\em int} & time, double input\-\_\-current \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool spike 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+neuron.\-h\item 
+neuron.\-cpp\end{DoxyCompactItemize}

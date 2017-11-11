@@ -1,0 +1,6 @@
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/build/CMakeFiles/unitest.dir
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/build/CMakeFiles/neuron.dir
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/build/gtest/googlemock/gtest/CMakeFiles/gtest.dir
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/build/gtest/googlemock/CMakeFiles/gmock.dir
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/build/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir
+/home/INTRANET/juliano/myfiles/cppcourse-brunel/build/gtest/googlemock/CMakeFiles/gmock_main.dir
